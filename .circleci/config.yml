@@ -1,0 +1,31 @@
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  # Job one with a unique name
+  build:
+    docker:
+      - image: cimg/node:21.4.0
+    steps:
+      - checkout
+      - run: echo "安装依赖"
+      - run: npm install
+      - run: echo "执行构建!"
+      - run: npm run build
+      - run: 
+          name: Install and configure dependencies
+          # 使用 | 表示多行命令
+          command: |
+            npm install gh-pages --save-dev
+            git config user.email "xiaohuixu@126.com"
+            git config user.name "xhx"
+      - run:
+          name: Deploy docs to gh-pages branch
+          command: './node_modules/.bin/gh-pages --dotfiles --message "[skip ci] Updates" -d dist'
+
+workflows:
+  # Name of workflow
+  buildProject:
+    # List of jobs that will run
+    jobs:
+      - build
