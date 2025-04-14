@@ -3,22 +3,24 @@ version: 2.1
 
 jobs:
   # Job one with a unique name
-  say_hello:
+  install:
     docker:
      - image: cimg/base:current
     steps:
-      - run: echo "Say hello to YAML!"
+      - run: echo "安装依赖"
+      - run: npm install
   # Job two with a unique name
-  say_goodbye:
+  build:
     docker:
      - image: cimg/base:current
     steps:
-      - run: echo "Say goodbye to YAML!"
+      - run: echo "执行构建!"
+      - run: npm run build
 
 workflows:
   # Name of workflow
   hello_and_goodbye:
     # List of jobs that will run
     jobs:
-      - say_hello
-      - say_goodbye
+      - install
+      - build
