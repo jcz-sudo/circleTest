@@ -4,15 +4,15 @@ version: 2.1
 jobs:
   # Job one with a unique name
   install:
-    docker:
-     - image: cimg/base:current
+   docker:
+      - image: cimg/node:21.4.0
     steps:
       - run: echo "安装依赖"
       - run: npm install
   # Job two with a unique name
   build:
     docker:
-     - image: cimg/base:current
+      - image: cimg/node:21.4.0
     steps:
       - run: echo "执行构建!"
       - run: npm run build
