@@ -7,6 +7,7 @@ jobs:
     docker:
       - image: cimg/node:21.4.0
     steps:
+      - checkout
       - run: echo "安装依赖"
       - run: npm install
   # Job two with a unique name
