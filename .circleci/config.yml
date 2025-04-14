@@ -3,25 +3,19 @@ version: 2.1
 
 jobs:
   # Job one with a unique name
-  install:
+  build:
     docker:
       - image: cimg/node:21.4.0
     steps:
       - checkout
       - run: echo "安装依赖"
       - run: npm install
-  # Job two with a unique name
-  build:
-    docker:
-      - image: cimg/node:21.4.0
-    steps:
       - run: echo "执行构建!"
       - run: npm run build
 
 workflows:
   # Name of workflow
-  hello_and_goodbye:
+  buildProject:
     # List of jobs that will run
     jobs:
-      - install
       - build
